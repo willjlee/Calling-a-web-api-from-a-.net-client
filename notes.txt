@@ -1,0 +1,20 @@
+Nots: Calling a WebAPI from a .NET client
+
+http://www.asp.net/web-api/overview/web-api-clients/calling-a-web-api-from-a-net-client
+
+
+Note that the original tutorial targeted a different API than my solution. I used the contact manager API that I hosted online in the previous tutorial.
+----
+
+"The GetAsync method sends an HTTP GET request. As the name implies, GetAsyc is asynchronous. It returns immediately, without waiting for a response from the server. The return value is a Task object that represents the asynchronous operation. When the operation completes, the Task.Result property contains the HTTP response.
+
+It is important to understand that taking the Result property blocks your application thread until the request completes (or times out)."
+
+If you don't want JSON or XML, you can set your own data formatter. See the turorial for details, but you create a list of formatters to accept and then pass it as an argument to the ReadAsAsync method (which parses the response)
+
+HttpClient methods of note:
+getAsync, PostAsJsonAsync, PostAsXmlAsync, PutAsJsonAsync, PutAsXmlAsync, DeleteAsync
+
+One can also treat error codes as exceptions using EnsureSuccessStatusCode() rather than IsSuccessfulStatusCode and then cacthing the exception.
+
+HttpClient can be configured by creating a WebRequestHandler with desired options and passing it to the HttpClient constructor
